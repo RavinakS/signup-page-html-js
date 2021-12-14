@@ -10,7 +10,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Home</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><button onclick="document.getElementById('signupPage').style.display='block'" >signUp</button></li>
+        <li><button onclick="document.getElementById('loginPage').style.display='block'" >Login</button></li>
+      </ul>
+    </div>
+</nav>
+
   <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
     button {
       background-color: #04AA6D;
       color: white;
@@ -20,75 +31,35 @@
       cursor: pointer;
       width: 100%;
     }
-
     button:hover {
       opacity: 0.8;
     }
-
-    .container {
-      padding: 16px;
-    }
-
-    /* The Modal (background) */
+  
     .signup {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
+      display: none; 
+      position: fixed; 
       left: 0;
       top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: #474e5d;
+      width: 100%; 
+      height: 100%; 
       padding-top: 50px;
-    }
+    } 
 
-    /* The Modal (background) */
     .login {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
+      display: none; 
+      position: fixed; 
       left: 0;
       top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: #474e5d;
+      width: 100%; 
+      height: 100%; 
       padding-top: 50px;
     }
 
-    @signup screen and (max-width: 300px) {
-      span.psw {
-         display: block;
-         float: none;
-      }
-    }
-
-    @login screen and (max-width: 300px) {
-      span.psw {
-         display: block;
-         float: none;
-      }
-    }
   </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Logo</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-          </ul>
-        </div>
-      </nav>
-      <br/>
-
-  <button onclick="document.getElementById('signupPage').style.display='block'">signUp</button>
-  <button onclick="document.getElementById('loginPage').style.display='block'">Login</button>
-  
-      <div id="signupPage" class="signup">
+  <br/>
+      <form id="signupPage" class="signup">
         <div class="container">
           <div class="row">
             <div class="col s12">
@@ -128,9 +99,9 @@
             <p id="error-msg"></p>
           </div>
         </div>
-      </div>
+      </form>
 
-    <div id="loginPage" class="login">
+    <form id="loginPage" class="login">
       <div class="container">
         <div class="row">
           <div class="col s12">
@@ -151,7 +122,7 @@
           <p id="login-error-msg"></p>
         </div>
       </div>
-    </div>
+    </form>
 </body>
 
 <script>

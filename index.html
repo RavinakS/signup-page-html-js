@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+  <style>
+    button {
+      background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .signup {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: #474e5d;
+      padding-top: 50px;
+    }
+
+    /* The Modal (background) */
+    .login {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: #474e5d;
+      padding-top: 50px;
+    }
+
+    @signup screen and (max-width: 300px) {
+      span.psw {
+         display: block;
+         float: none;
+      }
+    }
+
+    @login screen and (max-width: 300px) {
+      span.psw {
+         display: block;
+         float: none;
+      }
+    }
+  </style>
 </head>
 <body>
     <nav>
@@ -23,64 +84,90 @@
         </div>
       </nav>
       <br/>
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
 
+  <button onclick="document.getElementById('signupPage').style.display='block'">signUp</button>
+  <button onclick="document.getElementById('loginPage').style.display='block'">Login</button>
+  
+      <div id="signupPage" class="signup">
+        <div class="container">
+          <div class="row">
+            <div class="col s12">
               <div class="row">
                 <div class="input-field col s6">
                   <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="firstName">
                   <label for="first_name">First Name</label>
                 </div>
-
                 <div class="input-field col s6">
                   <input id="last_name" type="text" class="validate" name="lastName">
                   <label for="last_name">Last Name</label>
                 </div>
               </div>
-
               <div class="row">
                 <div class="input-field col s12">
                   <input id="email" type="email" class="validate" name="email">
                   <label for="email">Email</label>
                 </div>
               </div>
-
               <div class="row">
                 <div class="input-field col s12">
                   <input id="password" type="password" class="validate" name="password">
                   <label for="password">Password</label>
                 </div>
               </div>
-
               <div class="row">
                 <div class="input-field col s12">
                   <input id="cPassword" type="password" class="validate" name="cPassword">
                   <label for="cPassword">Confirm Password</label>
                 </div>
               </div>
-              
-              <button class="waves-effect waves-light btn-large" type="submit" onclick="formValidation()" >
+              <button class="waves-effect waves-light btn-large" type="submit" onclick="signUpFormValidation()" >
                   <i class="material-icons right">assignment_turned_in</i>
                   Submit
               </button>
-
             </div>
             <p id="error-msg"></p>
           </div>
+        </div>
+      </div>
+
+    <div id="loginPage" class="login">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="login-email" type="email" class="validate" name="email">
+                <label for="email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="login-password" type="password" class="validate" name="password">
+                <label for="password">Password</label>
+              </div>
+            </div> 
+            <button class="waves-effect waves-light btn-large" type="submit" onclick="loginFormValidation()">Login</button>
+          </div>
+          <p id="login-error-msg"></p>
+        </div>
+      </div>
     </div>
 </body>
 
 <script>
+
+    var signup = document.getElementById('signupPage');
+    var login = document.getElementById('loginPage');
+
     const regexObject = {
         name: new RegExp(/^[a-zA-Z]{2,15}$/),
         email: new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
         password: new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
     }
 
-    const formValidation = () =>{
+    const signUpFormValidation = () =>{
         const errorP = document.getElementById('error-msg')
-        errorP.innerHTML = ''
+        errorP.innerText = ''
 
         const firstName = document.getElementById('first_name').value
         const lastName = document.getElementById('last_name').value
@@ -89,26 +176,49 @@
         const cPassword = document.getElementById('cPassword').value
 
         if(!regexObject.name.test(firstName)) {
-            errorP.innerHTML = '<h1>Invalid first name</h1>'
+            errorP.innerText = 'Invalid first name'
             return;
         }else if(!regexObject.name.test(lastName)) {
-            errorP.innerHTML = '<h1>Invalid last name</h1>'
+            errorP.innerText = 'Invalid last name'
             return;
         }else if(!regexObject.email.test(email)) {
-            errorP.innerHTML = '<h1>Invalid Email</h1>'
+            errorP.innerText = 'Invalid Email'
             return;
         }else if(!regexObject.password.test(password)) {
-            errorP.innerHTML = '<h1>Invalid Password</h1>'
+            errorP.innerText = 'Invalid Password'
             return;
         }else if(!regexObject.password.test(cPassword)) {
-            errorP.innerHTML = '<h1>Invalid confirm password</h1>'
+            errorP.innerText = 'Invalid confirm password'
             return;
         }else if(password != cPassword) {
-            errorP.innerHTML = '<h1>Password and Confirm password is mismatched</h1>'
+            errorP.innerText = 'Password and Confirm password is mismatched'
             return;
+        }else{
+          errorP.innerHTML = '<h1>Account has been created.</h1>'
+          return;
         }
 
     }
+
+  const loginFormValidation = () => {
+    const errorP = document.getElementById('login-error-msg')
+    errorP.innerText = ''
+
+    const email = document.getElementById('login-email').value
+    const password = document.getElementById('login-password').value
+
+    if(!regexObject.email.test(email)) {
+        errorP.innerText = 'Invalid Email'
+        return;
+    }else if(!regexObject.password.test(password)) {
+        errorP.innerText = 'Invalid Password'
+        return;
+    }else{
+      errorP.innerHTML = '<h1>Logged in Successfully.</h1>'
+      return;
+    }
+  }
 </script>
 
 </html>
+
